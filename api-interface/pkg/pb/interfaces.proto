@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package interfaces;
+
+option go_package = "./pkg/pb";
+
+service interfacesService {
+  rpc GetName(getNameRequest) returns (getNameResponse) {}
+}
+
+message getNameRequest {
+  int64 id = 1;
+}
+
+message getNameResponse {
+  int64 status = 1;
+  string error = 2;
+  string data = 3;
+}
+
