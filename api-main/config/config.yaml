@@ -1,0 +1,5 @@
+mongo:
+  uri: mongodb://localhost:27017
+
+gin:
+  address: 127.0.0.1:50054
