@@ -9,17 +9,16 @@ type User struct {
 	UserPassword string  `bson:"user_password,omitempty"`
 	AccessKey    string  `bson:"access_key,omitempty"`
 	SecretKey    string  `bson:"secret_key,omitempty"`
-	IsDelete     bool    `bson:"is_delete,omitempty"`
+	IsDelete     uint    `bson:"is_delete"`
 }
 
 type UserRegister struct {
-	UserAccount 	string  `json:"user_account"`
-	UserPassword 	string  `json:"user_password"`
-	CheckPassword 	string  `json:"user_password"`
+	UserAccount 	string  `json:"userAccount"`
+	UserPassword 	string  `json:"userPassword"`
+	CheckPassword 	string  `json:"checkPassword"`
 }
 
 type UserLogin struct {
-	UserAccount 	string  `json:"user_account"`
-	UserPassword 	string  `json:"user_password"`
-	CheckPassword 	string  `json:"user_password"`
+	UserAccount 	string  `json:"userAccount"`
+	UserPassword 	string  `json:"userPassword"`
 }

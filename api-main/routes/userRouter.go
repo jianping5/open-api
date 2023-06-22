@@ -13,6 +13,8 @@ func addUserRouter(apiGroup *gin.RouterGroup) {
 			register	注册
 			logout		登出
 		*/
+		userRouter.POST("login", api.UserLogin)
 		userRouter.POST("register", api.UserRegister)
+		userRouter.POST("logout", api.UserLogout)
 	}
 }
