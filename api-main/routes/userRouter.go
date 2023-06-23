@@ -1,8 +1,9 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
 	"api-main/api"
+
+	"github.com/gin-gonic/gin"
 )
 
 func addUserRouter(apiGroup *gin.RouterGroup) {
@@ -16,5 +17,6 @@ func addUserRouter(apiGroup *gin.RouterGroup) {
 		userRouter.POST("login", api.UserLogin)
 		userRouter.POST("register", api.UserRegister)
 		userRouter.POST("logout", api.UserLogout)
+		userRouter.GET("get/login", api.GetCurrentUser)
 	}
 }

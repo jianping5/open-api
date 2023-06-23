@@ -9,7 +9,7 @@ type User struct {
 	UserPassword string  `bson:"user_password,omitempty"`
 	AccessKey    string  `bson:"access_key,omitempty"`
 	SecretKey    string  `bson:"secret_key,omitempty"`
-	IsDelete     uint    `bson:"is_delete"`
+	IsDelete     int8    `bson:"is_delete"`
 }
 
 type UserRegister struct {

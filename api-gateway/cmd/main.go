@@ -1,9 +1,11 @@
 package main
 
 import (
-	"log"
 	"api-gateway/pkg/config"
 	"api-gateway/pkg/interfaces"
+	"api-gateway/pkg/middlewares"
+	"log"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,10 +17,9 @@ func main() {
 	}
 
 	r := gin.Default()
+	r.Use(middlewares.Conv())
 
 	interfaces.RegisterRoutes(r, &c)
 
 	r.Run(c.Port)
 }
-
-

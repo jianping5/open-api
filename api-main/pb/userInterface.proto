@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package userInterface;
+
+option go_package = "./pb";
+
+service interfacesService {
+  rpc AddUserInterfaceInfo(addUserInterfaceInfoRequest) returns (addUserInterfaceInfoResponse) {}
+}
+
+message addUserInterfaceInfoRequest {
+  string userId = 1;
+  string interfaceInfoId = 2;
+}
+
+message addUserInterfaceInfoResponse {
+  bool data = 1;
+}
+

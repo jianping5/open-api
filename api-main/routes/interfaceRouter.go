@@ -4,7 +4,6 @@ import (
 	"api-main/api"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-delve/delve/service/api"
 )
 
 func addInterfaceRouter(apiGroup *gin.RouterGroup) {
@@ -27,6 +26,6 @@ func addInterfaceRouter(apiGroup *gin.RouterGroup) {
 		interfaceRouter.POST("online", api.OnlineInterfaceInfo)
 		interfaceRouter.POST("offline", api.OffLineInterfaceInfo)
 		interfaceRouter.POST("invoke", api.InvokeInterfaceInfo)
-		interfaceRouter.POST("list/page", api.ListInterfaceInfoByPage)
+		interfaceRouter.GET("list/page", api.ListInterfaceInfoByPage)
 	}
 }
