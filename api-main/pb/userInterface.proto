@@ -4,16 +4,46 @@ package userInterface;
 
 option go_package = "./pb";
 
-service interfacesService {
-  rpc AddUserInterfaceInfo(addUserInterfaceInfoRequest) returns (addUserInterfaceInfoResponse) {}
+service UserInterfaceService {
+  rpc AddUserInterfaceInfo(AddUserInterfaceInfoRequest) returns (AddUserInterfaceInfoResponse) {}
+  rpc GetUserByAccessKey(GetUserByAccessKeyRequest) returns (GetUserByAccessKeyResponse) {}
+  rpc GetInterfaceInfo(GetInterfaceInfoRequest) returns (GetInterfaceInfoResponse) {}
 }
 
-message addUserInterfaceInfoRequest {
+message AddUserInterfaceInfoRequest {
   string userId = 1;
   string interfaceInfoId = 2;
 }
 
-message addUserInterfaceInfoResponse {
-  bool data = 1;
+message AddUserInterfaceInfoResponse {
+  int64 status = 1;
+  string error = 2;
+  bool data = 3;
+}
+
+message GetUserByAccessKeyRequest {
+  string accessKey = 1;
+}
+
+message User {
+  string userId = 1;
+  string secretKey = 2;
+}
+
+message GetUserByAccessKeyResponse {
+  int64 status = 1;
+  string error = 2;
+  User data = 3;
+}
+
+message GetInterfaceInfoRequest {
+  string url = 1;
+  string method = 2;
+}
+
+message GetInterfaceInfoResponse {
+  int64 status = 1;
+  string error = 2;
+  string data = 3;
 }
 

@@ -5,7 +5,9 @@ import (
 	"api-main/utils"
 	"context"
 	"io/ioutil"
+	"math/rand"
 	"strings"
+	"time"
 
 	// "fmt"
 	"net/http"
@@ -243,13 +245,68 @@ func InvokeInterfaceInfo(c *gin.Context) {
 	// 查询该接口信息
 	coll := DB.Database("open-api").Collection("interface_info")
 	interfaceInfoId, err := primitive.ObjectIDFromHex(interfaceInfoInvokeRequest.Id)
-	filter := bson.D{{"_id", interfaceInfoId}}
+	filter := bson.D{{"_id", interfaceInfoId}, {"is_delete", 0}}
 	err = coll.FindOne(context.TODO(), filter).Decode(&interfaceInfo)
 	if err != nil {
 		panic(err)
 	}
 
-	// 添加用户接口调用关系，并添加次数
+	// TODO：统一走网关调用（SDK）
+	// 请求体
+	body := interfaceInfoInvokeRequest.UserRequestParams
+
+	client := &http.Client{}
+	var req *http.Request
+
+	if interfaceInfo.Method == "GET" {
+		req, err = http.NewRequest("GET", interfaceInfo.Url, nil)
+		if err != nil {
+			return
+		}
+	}
+
+	if interfaceInfo.Method == "POST" {
+		req, err = http.NewRequest("POST", interfaceInfo.Url, strings.NewReader(body))
+		if err != nil {
+			return
+		}
+	}
+
+	// Content-Type
+	req.Header.Set("Content-Type", "application/json")
+
+	// accessKey，用户标识
+	// TODO: 从配置中获取
+	accessKey := "31323035159a9d06aa9bea447fd3be18bb6f61e6"
+	req.Header.Add("accessKey", accessKey)
+
+	// nonce，随机数
+	// 设置随机种子，保证每次运行都有不同的随机数序列
+	rand.Seed(time.Now().UnixNano())
+
+	// 生成小于 10000 的随机数
+	nonce := rand.Int63n(10000)
+	req.Header.Add("nonce", strconv.FormatInt(nonce, 10))
+
+	// timestamp，当前时间戳
+	timestamp := time.Now().Unix()
+	req.Header.Add("timestamp", strconv.FormatInt(timestamp, 10))
+
+	// 签名（请求体 + secretKey）
+	// TODO: secretKey 从配置中获取
+	secretKey := "363835353430159a9d06aa9bea447fd3be18bb6f61e6"
+	sign := utils.GenSign(body, secretKey)
+	req.Header.Add("sign", sign)
+
+	// 请求体
+	req.Header.Add("body", interfaceInfoInvokeRequest.UserRequestParams)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return
+	}
+
+	/* // 添加用户接口调用关系，并添加次数
 	var errorCode utils.ErrorCode
 	errorCode.Code = 400101
 	errorCode.Message = "调用次数已用完"
@@ -274,7 +331,7 @@ func InvokeInterfaceInfo(c *gin.Context) {
 			"application/json",
 			strings.NewReader(interfaceInfoInvokeRequest.UserRequestParams),
 		)
-	}
+	} */
 
 	defer resp.Body.Close()
 
