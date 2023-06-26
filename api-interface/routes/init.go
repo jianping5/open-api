@@ -1,8 +1,9 @@
 package routes
 
 import (
+	"api-interface/middlewares"
+
 	"github.com/gin-gonic/gin"
-	// "api-interface/middlewares"
 )
 
 var R *gin.Engine
@@ -11,8 +12,8 @@ var R *gin.Engine
 func init() {
 	r := gin.Default()
 
-	// r.Use(middlewares.Cors())
-	
+	r.Use(middlewares.LimitSource())
+
 	// todo：添加路由分组
 	apiGroup := r.Group("/")
 	addDemoRouter(apiGroup)

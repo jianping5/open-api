@@ -13,6 +13,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	openapisdkgo "github.com/jianping5/open-api-sdk-go"
 )
 
 var INTERFACE_URL = "http://localhost:3000"
@@ -101,7 +102,8 @@ func AddUserInterfaceInfo(ctx *gin.Context, c pb.UserInterfaceServiceClient) {
 	fmt.Println(currentTimestamp)
 
 	// 比较签名是否一致
-	sign := utils.GenSign(bodyStr, secretKey)
+	sign := openapisdkgo.GenSign(bodyStr, secretKey)
+
 	fmt.Println(sign)
 	if sign != signStr {
 		HandleNoAuth(ctx)

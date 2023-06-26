@@ -108,6 +108,10 @@ func UserLogin(c *gin.Context) {
 func UserLogout(c *gin.Context) {
 	session := sessions.Default(c)
 	user := session.Get(utils.USER_LOGIN_STATE).(models.User)
+	// 删除登录态字段
+	session.Delete(utils.USER_LOGIN_STATE)
+	// 保存会话更改
+	session.Save()
 
 	c.JSON(http.StatusOK, utils.ResponseOK(user.Id))
 }
@@ -118,7 +122,13 @@ func UserLogout(c *gin.Context) {
 //	@param c
 func GetCurrentUser(c *gin.Context) {
 	session := sessions.Default(c)
-	user := session.Get(utils.USER_LOGIN_STATE).(models.User)
+	userAny := session.Get(utils.USER_LOGIN_STATE)
+	if userAny == nil {
+		c.JSON(http.StatusOK, utils.ResponseError(utils.NotLogin, "未登录"))
+	}
+
+	user := userAny.(models.User)
+
 
 	c.JSON(http.StatusOK, utils.ResponseOK(user))
 }

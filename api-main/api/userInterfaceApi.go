@@ -81,7 +81,7 @@ func ListTopInvokeInterfaceInfo(c *gin.Context) {
 
 	// 查找 total_num 前 3 的接口 id（user_interface_info）
 	coll := DB.Database("open-api").Collection("user_interface_info")
-	opts := options.Find().SetSort(bson.D{{"total_num", -1}}).SetLimit(3)
+	opts := options.Find().SetSort(bson.D{{"total_num", -1}})
 	cursor, err := coll.Find(context.TODO(), bson.D{}, opts)
 
 	if err = cursor.All(context.TODO(), &userInterfaceInfoList); err != nil {
@@ -94,7 +94,7 @@ func ListTopInvokeInterfaceInfo(c *gin.Context) {
 	// 获得其 id 组成的数组，并填充 map
 	for _, item := range userInterfaceInfoList {
 		idList = append(idList, item.InterfaceInfoId)
-		idTotalNumMap[item.InterfaceInfoId] = item.TotalNum
+		idTotalNumMap[item.InterfaceInfoId] +=  item.TotalNum
 	}
 
 	// 然后根据 idList 查找对应的接口名称（interface_info）
@@ -117,11 +117,17 @@ func ListTopInvokeInterfaceInfo(c *gin.Context) {
 
 	// 最后遍历 接口数组，将数值填充到 【接口信息 DTO】 内
 	// 调用总数就拿当前的接口 Id 从之前存储的 idTotalNumMap 中获取
+	// TODO：暂时计算 top 2
+	count := 0
 	for _, item := range interfaceInfoList {
+		if count >= 2 {
+			break
+		}
 		interfaceInfoDTOList = append(interfaceInfoDTOList, models.InterfaceInfoDTO{
 			Name: item.Name,
 			TotalNum: idTotalNumMap[item.Id],
 		})
+		count += 1
 	}
 
 

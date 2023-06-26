@@ -23,6 +23,9 @@ func Conv() gin.HandlerFunc {
 
 		proxy := httputil.NewSingleHostReverseProxy(proxyUrl)
 
+		// 流量染色（确保能够访问接口）
+		c.Request.Header.Add("authorization", "open-api-gateway")
+
 		proxy.ServeHTTP(c.Writer, c.Request)
 
 		c.Abort()

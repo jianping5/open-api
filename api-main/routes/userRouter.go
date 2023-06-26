@@ -13,6 +13,7 @@ func addUserRouter(apiGroup *gin.RouterGroup) {
 			login		登录
 			register	注册
 			logout		登出
+			get/login   获取当前登录用户
 		*/
 		userRouter.POST("login", api.UserLogin)
 		userRouter.POST("register", api.UserRegister)

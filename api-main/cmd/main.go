@@ -5,6 +5,7 @@ import (
 	"api-main/inner"
 	"api-main/pb"
 	"api-main/routes"
+	"api-main/work"
 	// "fmt"
 	"log"
 	"net"
@@ -19,6 +20,11 @@ func main() {
 		if err != nil {
 			return
 		}
+	}()
+
+	// 定时任务
+	go func() {
+		work.TimedWork()
 	}()
 
 
