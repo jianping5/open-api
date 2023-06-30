@@ -17,22 +17,22 @@ API 开放平台是一个为开发者提供接口和工具的平台，使他们�
 ## 功能大全
 项目结构图
 
-![](image/3.png)
+![3.png](image/3.png)
 
 （1）开发者
 
-![](image/1.jpg)
+![1.jpg](image/1.jpg)
 
 
 （2）管理员
 
-![](image/2.jpg)
+![2.jpg](image/2.jpg)
 
 ## 系统架构
-![](image/4.jpg)
+![4.jpg](image/4.jpg)
 
 ## 业务流程
-![](image/5.jpg)
+![5.jpg](image/5.jpg)
 
 ## 技术栈
 ### 前端
@@ -54,13 +54,13 @@ API 开放平台是一个为开发者提供接口和工具的平台，使他们�
 - mongo-go-driver 1.11.x
 
 ## 运行设计
-![](image/6.jpg)
+![6.jpg](image/6.jpg)
 
 ## API 签名认证
-![](image/7.png)
+![7.png](image/7.png)
 
 ## SDK 设计
-![](image/8.png)
+![8.png](image/8.png)
 
 - [Go SDK](https://github.com/jianping5/open-api-sdk-go)
 - [Java SDK](https://github.com/jianping5/open-api-sdk-java)
