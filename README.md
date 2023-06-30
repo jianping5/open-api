@@ -52,6 +52,8 @@ API 开放平台是一个为开发者提供接口和工具的平台，使他们�
 - grpc-go 1.56.x
 - MongoDB
 - mongo-go-driver 1.11.x
+- robfig/cron 3.0.x
+- gin-contrib/sessions 0.0.5
 
 ## 运行设计
 ![6.jpg](image/6.jpg)
