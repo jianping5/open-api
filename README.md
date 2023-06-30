@@ -21,12 +21,30 @@ API 开放平台是一个为开发者提供接口和工具的平台，使他们�
 
 ![](image/2.jpg)
 
-
 ## 系统架构
 ![](image/4.jpg)
 
 ## 业务流程
 ![](image/5.jpg)
+
+## 技术栈
+### 前端
+主要技术
+- React 18
+- Umi 4.x
+- Ant Design 4.x 组件库
+- Ant Design Pro Components 高级组件
+- TypeScript 类型控制
+- Eslint 代码规范控制
+- Prettier 美化代码
+
+### 后端
+主要技术
+- Go 1.19
+- Gin 1.9.x
+- grpc-go 1.56.x
+- MongoDB
+- mongo-go-driver 1.11.x
 
 ## 运行设计
 ![](image/6.jpg)
@@ -36,6 +54,9 @@ API 开放平台是一个为开发者提供接口和工具的平台，使他们�
 
 ## SDK 设计
 ![](image/8.png)
+
+- [Go SDK](https://github.com/jianping5/open-api-sdk-go)
+- [Java SDK](https://github.com/jianping5/open-api-sdk-java)
 
 ## 数据库设计
 （1）用户表
