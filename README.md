@@ -4,11 +4,11 @@ API 开放平台是一个为开发者提供接口和工具的平台，使他们�
 
 平台为开发者用户提供了接口文档查阅和在线调试功能，另外还可以下载 SDK，便于开发者接入。而管理者可以开发并创建接口，对接口进行上线、下线、修改、删除等操作，并可以按条件进行查询。另外管理人员还可以进行统计分析，查看接口调用情况。 
 
-<!-- | 子项目              | 描述                              | 目录          |
+| 子项目              | 描述                              | 目录          |
 | ------------------- | --------------------------------- | ------------- |
 | API 网关            | 拦截 API 访问请求，做统一业务处理 | [api-gateway](https://github.com/jianping5/open-api/tree/main/api-gateway)   |
 | 模拟接口            | 平台提供的 API                    | [api-interface](https://github.com/jianping5/open-api/tree/main/api-interface) |
-| 用户前台+管理员后台 | 平台主要业务                      | [api-main](https://github.com/jianping5/open-api/tree/main/api-main)      | -->
+| 用户前台+管理员后台 | 平台主要业务                      | [api-main](https://github.com/jianping5/open-api/tree/main/api-main)      |
 
 
 ## 应用场景
